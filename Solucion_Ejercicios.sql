@@ -11,7 +11,7 @@ GO
 -- PUNTO 2: Actualización estatus de usuarios inactivos por más de 1 año
 UPDATE Catalogo_Usuarios
 SET estatus = 0
-WHERE ultima_conexion < DATEADD(YEAR, -1, GETDATE());
+WHERE ultima_conexion <= DATEADD(YEAR, -1, GETDATE());
 GO
 
 -- PUNTO 3: Nuevo campo de nota mínima en Catalogo_Materias
@@ -28,7 +28,7 @@ WHERE LEN(contrasena) < 8
    OR contrasena NOT LIKE '%[0-9]%';
 GO
 
--- PUNTO 7: Corregir id_usuario en Transaccion_Examenes
+-- PUNTO 7: Corrección id_usuario en Transaccion_Examenes
 UPDATE TE
 SET TE.id_usuario = CE.id_usuarios
 FROM Transaccion_Examenes TE
